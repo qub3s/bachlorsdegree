@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+
+<project name="DörferPreset" default="default" basedir=".">
+	<description>
+		Ant Build File für das Preset für das APP Spiel im Sommersemester 2022.
+	</description>
+
+	<!-- global properties -->
+	<property name="presetversion" value="1.0.0"/>
+
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist" location="dist"/>
+	<property name="doc" location="doc"/>
+	<property name="lib" location="lib"/>
+	<property name="graphics" location="graphics"/>
+	<property name="customGraphicsFrom" location="src/doerfer/graphics"/>
+	<property name="customGraphicsTo" location="../CustomGraphics"/>
+
+	<!-- classpath -->
+	<path id="build.classpath">
+		<file name = "build/"/>
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+		<!-- <fileset dir="build">
+			<include name="**" />
+		</fileset> -->
+	</path>
+
+	<path id="test">
+			<file name = "build/"/>
+  </path>
+
+	<target name="default" depends="init,build,doc,jar" description="the default behaviour" />
+
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<!-- Create the build directory structure used by build -->
+		<mkdir dir="${build}"/>
+		<mkdir dir="${doc}"/>
+	</target>
+
+	<target name="build" depends="init" description="compile the source">
+		<!-- Compile the Java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}" classpathref="build.classpath" includeantruntime="false">
+			<compilerarg value="-Xlint:all"/>
+		</javac>
+		<!-- Include the graphics, as they are needed to be relative to the classes -->
+		<copy todir="${build}/graphics">
+			<fileset dir="${graphics}"/>
+		</copy>
+	</target>
+
+	<target name="dist" depends="clean,init,build,doc" description="generate the distribution">
+		<!-- Create the distribution directory for new releases -->
+		<mkdir dir="${dist}"/>
+		<jar jarfile="${dist}/Doerfer-Preset-${presetversion}.jar" basedir="${build}" />
+		<jar jarfile="${dist}/Doerfer-Preset-${presetversion}-source.jar" basedir="${src}" />
+		<jar jarfile="${dist}/Doerfer-Preset-${presetversion}-javadoc.jar" basedir="${doc}" />
+		<copy todir="${dist}">
+			<fileset dir="${lib}"/>
+		</copy>
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<!--delete dir="${build}"/-->
+		<delete dir="${doc}"/>
+		<delete dir="${dist}"/>
+		<delete file="../appgefahren.jar" />
+	</target>
+
+	<target name="run" depends="build" description="execute the Test Class">
+		<exec executable="./run.sh" />
+	</target>
+	
+	<target name="doc" depends="init" description="generate the distribution">
+		<javadoc destdir="${doc}" author="true" version="true" use="true" private="true" sourcepath="${src}">
+			<arg value="-Xdoclint:all"/>
+			<classpath refid="build.classpath"/>
+		</javadoc>
+	</target>
+	
+
+	<target name="jar" depends="clean" description="create jar file">
+    	<manifestclasspath property="jar.classpath" jarfile="../appgefahren.jar">
+      		<classpath refid="build.classpath"/>
+    	</manifestclasspath>
+
+		<jar destfile="../appgefahren.jar" basedir=".">
+			<manifest>
+				<attribute name="Class-Path" value="${jar.classpath}"/>
+				<attribute name="Main-Class" value="doerfer.MainFrame"/>
+   			</manifest>
+		</jar>
+		<copy todir="${customGraphicsTo}">
+			<fileset dir="${customGraphicsFrom}"/>
+		</copy>
+  </target>
+
+</project>
