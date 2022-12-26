@@ -1,2 +1,2 @@
 # bachlorsdegree
-Most of the Code written in my Bachlorsdegree
+Most of the Code written during my Bachlorsdegree
