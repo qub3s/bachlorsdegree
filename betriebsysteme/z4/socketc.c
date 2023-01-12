@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <sys/un.h>
 
-void main(){
+void main(int argc, char* argv[]){
     
     struct sockaddr_un addr;
     strcpy(addr.sun_path,"mysocket");
@@ -25,4 +25,7 @@ void main(){
     }
 
     printf("connected\n");
+    printf("%s\n",argv[1]);
+    send(sk, argv[1], strlen(argv[1]), 0);
+    close(clsk);
 }

@@ -23,18 +23,24 @@ void main(){
         exit(EXIT_FAILURE);
     }
     
-    if (listen(sk, 3) < 0){
-        printf("listen failed\n");
-        exit(EXIT_FAILURE);
-    };
 
-    int new_sk = accept(sk, (struct sockaddr*)&addr, (socklen_t*) &addrlen);
+    while(1){
+        char buffer[80] = {'\0'};
 
-    printf("%d",new_sk);
-    if (new_sk < 0){
-        printf("accept failed\n");
-        exit(EXIT_FAILURE);
+        if (listen(sk, 3) < 0){
+            printf("listen failed\n");
+            exit(EXIT_FAILURE);
+        };
+
+        int new_sk = accept(sk, (struct sockaddr*)&addr, (socklen_t*) &addrlen);
+        if (new_sk < 0){
+            printf("accept failed\n");
+            exit(EXIT_FAILURE);
+        }
+
+        int valread = read(new_sk, buffer, 79);
+        printf("%s\n",buffer);
+        close(new_sk);
     }
-
 }
 
