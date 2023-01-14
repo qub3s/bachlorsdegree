@@ -5,6 +5,7 @@
 #include <sys/shm.h>
 #include <string.h>
 
+// argv[1] pid argv[2] shmid argv[3] nameorfileofpath 
 void main(int argc, char* argv[]){
     FILE *file;
     file = fopen(argv[3],"r");
