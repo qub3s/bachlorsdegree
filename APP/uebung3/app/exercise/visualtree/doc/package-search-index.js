@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"app.exercise.adt.java"},{"l":"app.exercise.algebra.java"},{"l":"app.exercise.testing.java"},{"l":"app.exercise.visualtree.java"}];updateSearchResults();

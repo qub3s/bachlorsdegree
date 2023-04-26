@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<project name="first package">
+    <javac srcdir="app/java/" destdir="app/" />
+
+    <javadoc sourcepath="app/java/*.java" destdir="app/doc/">
+        <fileset dir="app/java/" >
+            <include name="**/*.java"/>
+        </fileset>
+    </javadoc>
+
+</project>

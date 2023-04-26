@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"app.exercise.algebra","l":"Fractional"},{"p":"app.exercise.algebra","l":"Rational"}]

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<project name="first package">
+    <javac srcdir="app/exercise/algebra/java/" destdir="./" />
+    <javac srcdir="app/exercise/visualtree/java/" destdir="./" />
+    <javac srcdir="app/exercise/adt/java/" destdir="./" />
+    <javac srcdir="app/exercise/testing/java/" destdir="./" />
+
+    <javadoc sourcepath="./" destdir="app/exercise/testing/doc/">
+        <fileset dir="app/exercise/testing/java/" >
+            <include name="**/*.java"/>
+        </fileset>
+    </javadoc>
+
+    <javadoc sourcepath="./" destdir="app/exercise/algebra/doc/">
+        <fileset dir="app/exercise/algebra/java/" >
+            <include name="**/*.java"/>
+        </fileset>
+    </javadoc>
+
+    <javadoc sourcepath="./" destdir="app/exercise/visualtree/doc/">
+        <fileset dir="app/exercise/visualtree/java/" >
+            <include name="**/*.java"/>
+        </fileset>
+    </javadoc>
+
+    <javadoc sourcepath="./" destdir="app/exercise/adt/doc/">
+        <fileset dir="app/exercise/adt/java/" >
+            <include name="**/*.java"/>
+        </fileset>
+    </javadoc>
+
+
+</project>
