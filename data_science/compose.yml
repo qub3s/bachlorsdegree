@@ -1,0 +1,10 @@
+version: "3"
+services: 
+  test: 
+    image: ds 
+    command: pytest
+
+  app: 
+    image: ds 
+    entrypoint: python3 real_test.py 
+
